@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Memo Create</title>
+</head>
+<body>
+<form method="post" action="{% url 'memo:memo_create' %}">
+  <table>
+    {% csrf_token %}
+<!--    {{ form.as_table }}-->
+    <input type="hidden" name="csrfmiddlewaretoken"
+           value="U2W58fChfSjAmFz1J55beZXviW7AOi0tyRD52QHxst7MpfCrRfhRoVnss8mWsVZH" kl_vkbd_parsed="true">
+    <tbody>
+    <tr>
+      <th><label for="title">タイトル:</label></th>
+      <td><input type="text" name="title" maxlength="255" required="" id="title" kl_vkbd_parsed="true"></td>
+    </tr>
+    <tr>
+      <th><label for="content">本文:</label></th>
+      <td><textarea name="content" cols="40" rows="10" id="content"></textarea></td>
+    </tr>
+    <tr>
+      <th><label for="tags">タグ:</label></th>
+      <td><select name="tags" multiple>
+        {% for tag in tag_list %}
+        <option value="{{ tag.pk }}">{{ tag.name }}</option>
+        {% endfor %}
+      </select></td>
+    </tr>
+    </tbody>
+  </table>
+  <button type="submit">作成</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Memo List</title>
+</head>
+<body>
+<a href="{% url 'memo:memo_create' %}">新規メモ作成</a>
+<table border="2">
+  <thead>
+  <tr>
+    <th>タイトル</th>
+    <th>内容</th>
+    <th>タグ</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for memo in memo_list %}
+  <tr>
+    <td>{{ memo.title }}</td><td>{{ memo.content }}</td>
+    <td>
+      {% for tag in  memo.tag_list %}
+        「{{ tag.name }}」
+      {% endfor %}
+    </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</body>
+</html>
