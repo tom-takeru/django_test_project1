@@ -19,7 +19,7 @@
   <tr>
     <td>{{ memo.title }}</td><td>{{ memo.content }}</td>
     <td>
-      {% for tag in  memo.tag_list %}
+      {% for tag in  memo.tags.all %}
         「{{ tag.name }}」
       {% endfor %}
     </td>

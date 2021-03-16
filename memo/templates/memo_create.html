@@ -6,15 +6,12 @@
 </head>
 <body>
 <form method="post" action="{% url 'memo:memo_create' %}">
+  {% csrf_token %}
   <table>
-    {% csrf_token %}
-<!--    {{ form.as_table }}-->
-    <input type="hidden" name="csrfmiddlewaretoken"
-           value="U2W58fChfSjAmFz1J55beZXviW7AOi0tyRD52QHxst7MpfCrRfhRoVnss8mWsVZH" kl_vkbd_parsed="true">
     <tbody>
     <tr>
       <th><label for="title">タイトル:</label></th>
-      <td><input type="text" name="title" maxlength="255" required="" id="title" kl_vkbd_parsed="true"></td>
+      <td><input type="text" name="title" maxlength="255" required id="title" kl_vkbd_parsed="true"></td>
     </tr>
     <tr>
       <th><label for="content">本文:</label></th>
@@ -31,6 +28,12 @@
     </tbody>
   </table>
   <button type="submit">作成</button>
+</form>
+
+<form method="post" action="{% url 'memo:update_add_tag' %}">
+  {% csrf_token %}
+  <label for="tag_name">新規タグ:</label>
+  <input type="text" name="tag_name" maxlength="127" required><button type="submit">作成</button>
 </form>
 </body>
 </html>

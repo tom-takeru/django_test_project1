@@ -20,15 +20,7 @@ class MemoListView(ListView):
 
     def get_queryset(self):
         memo_list = Memo.objects.all().order_by('-created_at')
-        for memo in memo_list:
-            memo.tag_list = memo.tags.all().select_related()
         return memo_list
-
-# class MemoCreateView2(CreateView):
-#     model = Memo
-#     template_name = 'memo_create.html'
-#     form_class = MemoCreateForm
-#     success_url = reverse_lazy('memo:memo_list')
 
 class MemoCreateView(View):
 
@@ -50,10 +42,9 @@ class MemoCreateView(View):
 
 # タグのアップデート
 def update_add_tag(request):
-    if request.POST["tag"] != "":
-        tag = Tag.objects.filter(name=request.POST["tag"])
-        if len(tag) == 0:
-            tag = Tag(name=request.POST["tag"])
+    if request.POST["tag_name"] != "":
+        name = Tag.objects.filter(name=request.POST["tag_name"])
+        if len(name) == 0:
+            tag = Tag(name=request.POST["tag_name"])
             tag.save()
-
-    return HttpResponseRedirect(reverse('memo_create.html'))
+    return HttpResponseRedirect(reverse('memo:memo_create'))
